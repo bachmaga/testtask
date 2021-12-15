@@ -1,0 +1,15 @@
+parameters:
+  level: 0
+  paths:
+    - src
+    - tests
+  ignoreErrors:
+    - message: '#Access to undefined constant App\\Enum\\TaskStatusEnum[A-z\:]+.#'
+      paths:
+        - src/Entity/*
+        - src/Operation/*
+    - message: '#Call to an undefined static method App\\Enum\\TaskStatusEnum\:\:cases\(\).#'
+      paths:
+        - src/Dbal/Type/*
+  bootstrapFiles:
+    - tests/bootstrap.php
