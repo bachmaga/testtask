@@ -26,9 +26,9 @@ class ExistValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, Exist::class);
         }
 
-        $r = $this->taskRepository->getByQuery(new TaskQuery(new Id($value)));
+        $result = $this->taskRepository->getByQuery(new TaskQuery(new Id($value)));
 
-        if ($r === null) {
+        if ($result->getTask() === null) {
             $this->context->buildViolation($constraint->message)
                 ->setParameter('{{ value }}', $this->formatValue($value))
                 ->addViolation();

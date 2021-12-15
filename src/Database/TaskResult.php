@@ -13,7 +13,7 @@ class TaskResult
     {
     }
 
-    public function getTask(): Task
+    public function getTask(): Task|null
     {
         return $this->collection->current();
     }
