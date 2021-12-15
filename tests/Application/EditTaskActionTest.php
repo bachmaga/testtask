@@ -35,7 +35,7 @@ class EditTaskActionTest extends WebTestCase
             ]),
         );
 
-        $this->assertResponseStatusCodeSame(Response::HTTP_CREATED);
+        $this->assertResponseStatusCodeSame(Response::HTTP_OK);
     }
 
     public function testFailed(): void

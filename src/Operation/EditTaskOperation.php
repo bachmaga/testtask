@@ -11,6 +11,7 @@ use App\Entity\ValueObject\Description;
 use App\Entity\ValueObject\Id;
 use App\Entity\ValueObject\Name;
 use App\Entity\ValueObject\Time;
+use App\Mapper\TaskMapper;
 use App\Repository\TaskRepository;
 use DateTimeImmutable;
 
@@ -18,10 +19,11 @@ class EditTaskOperation
 {
     public function __construct(
         private TaskRepository $taskRepository,
+        private TaskMapper $mapper,
     ) {
     }
 
-    public function execute(EditTaskRequest $request): Task
+    public function execute(EditTaskRequest $request): object
     {
         $task = $this->taskRepository->getByQuery(
             new TaskQuery(id: new Id($request->id))
@@ -38,6 +40,6 @@ class EditTaskOperation
 
         $this->taskRepository->save($task);
 
-        return $task;
+        return $this->mapper->toDto($task);
     }
 }

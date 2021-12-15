@@ -63,18 +63,7 @@ final class TasksController
     #[Route('/{id}', name: '_edit', methods: ['PUT'])]
     public function edit(EditTaskRequest $request, EditTaskOperation $operation): JsonResponse
     {
-        $task = $operation->execute($request);
-
-        return new JsonResponse(
-            data:null,
-            status: Response::HTTP_CREATED,
-            headers: [
-                'Location' => $this->router->generate(
-                    name: 'api_tasks_get',
-                    parameters: ['id' => $task->getId()->getValue()]
-                ),
-            ]
-        );
+        return new JsonResponse(data:$operation->execute($request));
     }
 
     #[Route('/{id}', name: '_complete', methods: ['PATCH'])]
